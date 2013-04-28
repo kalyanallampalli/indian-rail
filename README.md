@@ -1,6 +1,6 @@
 # Indian::Rail
 
-TODO: Write a gem description
+Indian Rail is a simple wrapper for finding out India train details
 
 ## Installation
 
