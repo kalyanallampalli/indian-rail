@@ -1,0 +1,72 @@
+module IndianRail
+	class Train < Api
+		class << self
+			def get_schedule(train_no=nil)
+				response = {}
+				return response[:message] = 'Please enter Train Number or Name' if train_no.blank?
+				page_response = crawl_page([base_url_prefix, schedule_url_sufix].compact.join("/"), :form_params => {'lccp_trnname' => train_no})			
+				begin
+					response = parse_page(page_response, train_no)							
+				rescue Exception => e	
+					puts "*********Exception got: #{e.message}**************"
+					response[:message] = 'Service is not available!!'
+				end
+				response
+			end
+			
+			def parse_page(body, train_no)
+				page = Nokogiri::HTML(body)
+				data = {:train_no => train_no}	
+				index = 1
+				tables = page.xpath('//table[@class="table_border_both"]')
+				details, train_detail = {}, {}
+				coach_details, stn_details = [], []
+				tables.collect do |table|
+					if index == 1						
+						table.css("tr:not([@class='heading_table_top'])").collect do |row|								
+							[
+								[:train_no, 'td[1]/text()'],
+								[:train_name, 'td[2]/text()'],
+								[:runs_from, 'td[3]/text()'],
+								[:runs_on, 'td[4]/text()']
+							].each do |name, xpath|
+								train_detail[name] = row.at_xpath(xpath).to_s.strip
+							end						
+						end
+					elsif index == 2
+						table.css("tr:not([@class='heading_table_top'])").collect do |row|	
+							coach_detail = {}
+							[
+								[:title, 'td[1]/text()'],
+								['1A', 'td[2]/text()'],
+								['2A', 'td[3]/text()'],
+								['FC', 'td[4]/text()'],
+								['3A', 'td[5]/text()'],
+								['CC', 'td[6]/text()'],
+								['SL', 'td[7]/text()'],
+								['2S', 'td[8]/text()'],
+								['3E', 'td[9]/text()']
+							].each do |name, xpath|
+								coach_detail[name] = row.at_xpath(xpath).to_s.strip
+							end
+							coach_details << coach_detail
+						end
+					elsif index == 3
+						table.css("tr:not([@class='heading_table_top'])").collect do |row|	
+							stn_detail = []
+							['td[1]/b/text()', 'td[2]/text()', 'td[3]/text()', 'td[4]/text()', 'td[5]/text()', 'td[6]/text()', 'td[7]/text()', 'td[8]/text()','td[9]/text()'].each do |xpath|
+								stn_detail << row.at_xpath(xpath).to_s.strip
+							end						
+							stn_details << stn_detail
+						end						
+					end	
+					index += 1
+				end				
+				details[:train_details] = train_detail
+				details[:coach_details] = coach_details
+				details[:stn_details] = stn_details
+				details
+			end
+		end
+	end
+end
