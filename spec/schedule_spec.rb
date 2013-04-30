@@ -7,8 +7,7 @@ describe IndianRail::Schedule do
 		end
 		
 		it "Should return results" do
-			resp = IndianRail::Schedule.find("12738", proxy: {url: 'proxy.cognizant.com', port: 6050}) #.should have_key(:train_details)
-			puts resp.inspect
+			IndianRail::Schedule.find(12727).should have_key(:train_details)
 		end
 	end	
 end
