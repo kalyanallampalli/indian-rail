@@ -20,11 +20,11 @@ Or install it yourself as:
 
 To enquire the PNR status of your journey *ticket*:
 
-	response = IndianRail::Pnr.enquiry "XXXXXXXXX"
+	response = IndianRail::Pnr.enquiry "pnr_number"
 	
 To find the schedule of a particular *Train*:
 
-	response = IndianRail::Schedule.find "train-number"
+	response = IndianRail::Schedule.find "train_number"
 	
 IndianRail will return a hash filled result something like this:
 	
@@ -32,7 +32,7 @@ IndianRail will return a hash filled result something like this:
 
 You can even send proxy details, if you are working under proxy server
 
-	response = IndianRail::Schedule.find "train-number", :proxy => {:url => "proxy.example.com", :port => 4050}
+	response = IndianRail::Schedule.find "train-number", :proxy => {:url => "proxy.example.com", :port => 'port_number'}
 	
 ## MIT License
 
