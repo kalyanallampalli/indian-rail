@@ -26,7 +26,6 @@ Train Schedule methods will accept either train number or train name to find the
 
 	response = IndianRail::Schedule.find "train_number"
 	
-Or
 	response = IndianRail::Schedule.find "train_name"
 	
 IndianRail will return a hash filled result something like this:
