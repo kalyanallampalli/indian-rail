@@ -1,15 +1,15 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'indian-rail/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "indian-rail"
-  gem.version       = IndianRail::VERSION
+  gem.name          = %q{indian-rail}
+  gem.version       = %q{1.0.1}
   gem.authors       = ["Kalyan Allampalli"]
-  gem.email         = ["kalyan.allampalli@gmail.com"]
-  gem.description   = %q{Client for the RESTful JSON Indian Rail}
-  gem.summary       = %q{Indian Rail helps you get all the information you want to know about Indian Railways.}
+  gem.email         = %q{kalyan.allampalli@gmail.com}
+  gem.description   = %q{Client for the Indian Rail Information}
+  gem.summary       = %q{Indian Rail helps you get all the required information you want to know about Indian Railways.}
+  gem.homepage		= %q{https://github.com/kalyanallampalli/indian-rail}
 
   gem.files = [	
 	"Gemfile",
@@ -17,8 +17,7 @@ Gem::Specification.new do |gem|
 	"LICENSE.txt",
 	"README.md",
 	"Rakefile",
-	"lib/indian-rail.rb",
-	"lib/indian-rail/version.rb",
+	"lib/indian-rail.rb",	
 	"lib/indian-rail/api.rb",
 	"lib/indian-rail/pnr.rb",
 	"lib/indian-rail/schedule.rb",	

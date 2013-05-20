@@ -6,8 +6,12 @@ describe IndianRail::Schedule do
 			IndianRail::Schedule.find.should include(:message => "Please Enter Train Number or Name")			
 		end
 		
-		it "Should return results" do
-			IndianRail::Schedule.find(12727).should have_key(:train_details)
+		it "Train name input should return results" do
+			IndianRail::Schedule.find("ratnachal").should have_key(:train_details)						
+		end
+		
+		it "Train number input should return results" do
+			IndianRail::Schedule.find(11028).should have_key(:train_details)
 		end
 	end	
 end

@@ -7,7 +7,7 @@ describe IndianRail::Pnr do
 		end
 		
 		it "Should return results" do
-			response = IndianRail::Pnr.enquiry "2342423423"
+			#response = IndianRail::Pnr.enquiry "2342423423", :proxy => {url: 'proxy.cognizant.com', port: 6050}						
 		end
 	end	
 end

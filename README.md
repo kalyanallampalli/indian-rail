@@ -22,9 +22,12 @@ To enquire the PNR status of your journey *ticket*:
 
 	response = IndianRail::Pnr.enquiry "pnr_number"
 	
-To find the schedule of a particular *Train*:
+Train Schedule methods will accept either train number or train name to find the schedule of a particular *Train*:
 
 	response = IndianRail::Schedule.find "train_number"
+	
+Or
+	response = IndianRail::Schedule.find "train_name"
 	
 IndianRail will return a hash filled result something like this:
 	
